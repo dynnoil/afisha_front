@@ -1,0 +1,39 @@
+<ion-card>
+
+  <div (click)="gotoDetail({eventId: event.id})">
+
+    <img src="{{event.image}}" />
+    
+    <ion-card-content>
+      <ion-card-title>
+        {{event.name}}
+      </ion-card-title>
+      <p>
+        {{event.description}}
+      </p>
+    </ion-card-content>
+
+  </div>
+
+  <ion-row no-padding>
+    <ion-col>
+      <button ion-button clear small color="danger" icon-left>
+          <ion-icon name='star'></ion-icon>
+          Favorite
+        </button>
+    </ion-col>
+    <ion-col text-center>
+      <button ion-button clear small color="danger" icon-left>
+          <ion-icon name='musical-notes'></ion-icon>
+          Listen
+        </button>
+    </ion-col>
+    <ion-col text-right>
+      <button ion-button clear small color="danger" icon-left>
+          <ion-icon name='share-alt'></ion-icon>
+          Share
+        </button>
+    </ion-col>
+  </ion-row>
+
+</ion-card>
