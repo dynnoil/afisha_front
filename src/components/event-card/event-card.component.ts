@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { ModalController } from 'ionic-angular';
 
-import { Event } from '../model/event';
-import { DetailsPage } from '../pages/details/details';
+import { Event } from '../../model/event';
+import { DetailsPage } from '../../pages/details/details';
 
 @Component({
   selector: 'event-card',
