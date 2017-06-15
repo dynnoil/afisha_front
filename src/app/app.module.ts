@@ -14,38 +14,42 @@ import { GoogleMapsComponent } from '../components/google-maps/google-maps.compo
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { EventService } from '../services/event.service';
+import { SharingService } from '../services/sharing.service';
 
 @NgModule({
-  declarations: [
-    MyApp,
-    AboutPage,
-    ContactPage,
-    HomePage,
-    TabsPage,
-    DetailsPage,
-    EventCardComponent,
-    GoogleMapsComponent
-  ],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(MyApp)
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    AboutPage,
-    ContactPage,
-    HomePage,
-    TabsPage,
-    DetailsPage
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    { provide: ErrorHandler, useClass: IonicErrorHandler },
-    EventService
-  ]
+    declarations: [
+        MyApp,
+        AboutPage,
+        ContactPage,
+        HomePage,
+        TabsPage,
+        DetailsPage,
+        EventCardComponent,
+        GoogleMapsComponent
+    ],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(MyApp)
+    ],
+    bootstrap: [IonicApp],
+    entryComponents: [
+        MyApp,
+        AboutPage,
+        ContactPage,
+        HomePage,
+        TabsPage,
+        DetailsPage
+    ],
+    providers: [
+        StatusBar,
+        SplashScreen,
+        SocialSharing,
+        { provide: ErrorHandler, useClass: IonicErrorHandler },
+        EventService,
+        SharingService
+    ]
 })
 export class AppModule { }

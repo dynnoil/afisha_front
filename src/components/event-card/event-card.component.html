@@ -3,7 +3,7 @@
   <div (click)="gotoDetail({eventId: event.id})">
 
     <img src="{{event.image}}" />
-    
+
     <ion-card-content>
       <ion-card-title>
         {{event.name}}
@@ -29,7 +29,7 @@
         </button>
     </ion-col>
     <ion-col text-right>
-      <button ion-button clear small color="danger" icon-left>
+      <button ion-button clear small color="danger" icon-left (click)="share()">
           <ion-icon name='share-alt'></ion-icon>
           Share
         </button>

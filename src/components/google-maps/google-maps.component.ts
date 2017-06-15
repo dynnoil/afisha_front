@@ -1,4 +1,5 @@
-import { Component, AfterViewInit, Input } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, Input } from '@angular/core';
+import { Platform } from 'ionic-angular';
 import {
     GoogleMaps,
     GoogleMap,
@@ -11,10 +12,10 @@ import {
 
 @Component({
     selector: 'google-maps',
-    template: '<div id="map" #map></div>',
+    template: '<div #map id="map"></div>',
     providers: [GoogleMaps]
 })
-export class GoogleMapsComponent implements AfterViewInit {
+export class GoogleMapsComponent implements AfterViewInit, OnDestroy {
     private map: GoogleMap;
 
     @Input() position: LatLng;
@@ -22,7 +23,7 @@ export class GoogleMapsComponent implements AfterViewInit {
     @Input() zoom: number;
     @Input() tilt: number;
 
-    constructor(private googleMaps: GoogleMaps) {
+    constructor(private platform: Platform, private googleMaps: GoogleMaps) {
         this.position = new LatLng(43.0741904, -89.3809802);
         this.markers = [];
         this.zoom = 18;
@@ -53,5 +54,9 @@ export class GoogleMapsComponent implements AfterViewInit {
             });
 
         });
+    }
+
+    ngOnDestroy(): void {
+        this.map.clear();
     }
 }

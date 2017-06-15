@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Platform, NavParams, ViewController } from 'ionic-angular';
+import { NavParams, ViewController } from 'ionic-angular';
 
 import { Event } from '../../model/event';
 
