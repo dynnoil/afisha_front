@@ -32,10 +32,12 @@ export class SharingService {
     }
 
     share(socialNetwork: string, message: string): void {
-        this.socialSharing.shareVia(socialNetwork, message).then(() => {
-            console.log("Shared!");
-        }).catch(() => {
-            console.log("Error while sharing!");
-        });
+        if (this.availableSocialNetworks.find(availableSocialNetwork => availableSocialNetwork === socialNetwork)) {
+            this.socialSharing.shareVia(socialNetwork, message).then(() => {
+                console.log("Shared!");
+            }).catch(() => {
+                console.log("Error while sharing!");
+            });
+        }
     }
 }
