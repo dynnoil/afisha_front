@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 import { LocalStorageService } from 'angular-2-local-storage';
 
 import { Event } from '../../model/event';
+import { DetailsPage } from '../../pages/details/details';
 
 @Component({
   selector: 'page-favorites',
@@ -11,7 +12,11 @@ import { Event } from '../../model/event';
 export class FavoritesPage implements OnInit {
   events: Event[] = [];
 
-  constructor(private navCtrl: NavController, private localStorageService: LocalStorageService) { }
+  constructor(
+    private navCtrl: NavController,
+    private modalCtrl: ModalController,
+    private localStorageService: LocalStorageService
+  ) { }
 
   ngOnInit(): void {
     if (this.localStorageService.length) {
@@ -20,6 +25,11 @@ export class FavoritesPage implements OnInit {
         this.events.push(this.localStorageService.get<Event>(key));
       });
     }
+  }
+
+  onEventClicked(eventId: number): void {
+    let modal = this.modalCtrl.create(DetailsPage, { eventId: eventId });
+    modal.present();
   }
 
 }

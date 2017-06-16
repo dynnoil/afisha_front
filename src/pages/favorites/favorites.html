@@ -8,7 +8,7 @@
 
 <ion-content>
   <ion-list>
-    <button ion-item *ngFor="let event of events">
+    <button ion-item *ngFor="let event of events" (click)="onEventClicked(event.id)">
       {{event.name}}
     </button>
   </ion-list>
