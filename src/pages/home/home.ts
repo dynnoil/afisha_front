@@ -26,7 +26,7 @@ export class HomePage implements OnInit {
   }
 
   onEventClicked(eventId: number): void {
-    let modal = this.modalCtrl.create(DetailsPage, eventId);
+    let modal = this.modalCtrl.create(DetailsPage, { eventId: eventId });
     modal.present();
   }
 

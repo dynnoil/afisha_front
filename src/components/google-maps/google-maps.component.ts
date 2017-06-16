@@ -57,6 +57,8 @@ export class GoogleMapsComponent implements AfterViewInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.map.clear();
+        if (this.map) {
+            this.map.clear();
+        }
     }
 }

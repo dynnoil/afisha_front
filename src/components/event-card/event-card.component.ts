@@ -8,16 +8,16 @@ import { Event } from '../../model/event';
 })
 export class EventCardComponent {
     @Input() event: Event;
-    @Output() onEventClicked = new EventEmitter<number>();
-    @Output() onShareClicked = new EventEmitter<number>();
+    @Output() onEventClicked = new EventEmitter<null>();
+    @Output() onShareClicked = new EventEmitter<null>();
 
     constructor( ) { }
 
     share(): void {
-      this.onShareClicked.emit(this.event.id);
+      this.onShareClicked.emit();
     }
 
     gotoDetail(): void {
-      this.onEventClicked.emit(this.event.id);
+      this.onEventClicked.emit();
     }
 }

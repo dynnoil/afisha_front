@@ -15,14 +15,15 @@ export class SharingService {
         let availableSocialNetworks: string[];
         this.socialNetworks.forEach(socialNetwork => {
             this.socialSharing.canShareVia(socialNetwork).then(() => {
-                console.log("Can share via {}!", socialNetwork);
+                console.log("Can share via ", socialNetwork);
                 availableSocialNetworks.push(socialNetwork);
             }).catch(() => {
-                console.log("Can't share via {}!", socialNetwork);
+                console.log("Can't share via ", socialNetwork);
             });
         });
         return availableSocialNetworks;
     }
+
     share(socialNetwork: string, message: string): void {
         this.socialSharing.shareVia(socialNetwork, message).then(() => {
             console.log("Shared!");
