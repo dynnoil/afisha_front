@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TitleCasePipe } from '@angular/common';
 import { NavController, ModalController, ActionSheetController } from 'ionic-angular';
 
 import { Event } from '../../model/event';
@@ -44,9 +45,10 @@ export class HomePage implements OnInit {
       }
     };
     let buttons: any[] = [];
+    let titleCasePipe = new TitleCasePipe();
     availableSocialNetworks.forEach(network => {
       buttons.push({
-        text: network,
+        text: titleCasePipe.transform(network),
         handler: () => {
           this.sharingService.share(network, this.events.find(event => event.id == eventId).link);
           console.log('Shared via ', network);
