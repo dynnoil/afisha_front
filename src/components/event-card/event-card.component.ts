@@ -1,9 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { ModalController } from 'ionic-angular';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Event } from '../../model/event';
-import { DetailsPage } from '../../pages/details/details';
-import { SharingService } from '../../services/sharing.service';
 
 @Component({
     selector: 'event-card',
@@ -11,19 +8,16 @@ import { SharingService } from '../../services/sharing.service';
 })
 export class EventCardComponent {
     @Input() event: Event;
+    @Output() onEventClicked = new EventEmitter<number>();
+    @Output() onShareClicked = new EventEmitter<number>();
 
-    constructor(
-        private modalCtrl: ModalController,
-        private sharingService: SharingService
-    ) { }
+    constructor( ) { }
 
     share(): void {
-        //let networks: string[] = this.sharingService.getAvailableSocialNetworks();
-        this.sharingService.share('telegram', "Hello, world!");
+      this.onShareClicked.emit(this.event.id);
     }
 
-    gotoDetail(eventId): void {
-        let modal = this.modalCtrl.create(DetailsPage, eventId);
-        modal.present();
+    gotoDetail(): void {
+      this.onEventClicked.emit(this.event.id);
     }
 }
