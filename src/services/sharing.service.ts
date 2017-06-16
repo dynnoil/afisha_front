@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Platform } from 'ionic-angular';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
 @Injectable()
@@ -9,10 +10,16 @@ export class SharingService {
         'telegram'
     ];
 
-    constructor(private socialSharing: SocialSharing) { }
+    availableSocialNetworks: string[];
 
-    getAvailableSocialNetworks(): string[] {
-        let availableSocialNetworks: string[];
+    constructor(private platform: Platform, private socialSharing: SocialSharing) {
+        platform.ready().then(() => {
+            this.availableSocialNetworks = this.getAvailableSocialNetworks();
+        });
+    }
+
+    private getAvailableSocialNetworks(): string[] {
+        let availableSocialNetworks: string[] = [];
         this.socialNetworks.forEach(socialNetwork => {
             this.socialSharing.canShareVia(socialNetwork).then(() => {
                 console.log("Can share via ", socialNetwork);

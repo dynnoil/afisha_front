@@ -31,37 +31,34 @@ export class HomePage implements OnInit {
   }
 
   onShareClicked(eventId: number): void {
-    this.presentActionSheet();
+    this.presentActionSheet(eventId);
   }
 
-  presentActionSheet() {
-    let availableSocialNetworks: string[] = this.sharingService.getAvailableSocialNetworks();
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Social Networks',
-      buttons: [
-        {
-          text: 'Destructive',
-          role: 'destructive',
-          handler: () => {
-            console.log('Destructive clicked');
-          }
-        },
-        {
-          text: 'Telegram',
-          handler: () => {
-            console.log('Archive clicked');
-            this.sharingService.share('telegram', 'WTF!');
-          }
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
+  presentActionSheet(eventId: number) {
+    let availableSocialNetworks: string[] = this.sharingService.availableSocialNetworks;
+    let cancelButton: any = {
+      text: 'Cancel',
+      role: 'cancel',
+      handler: () => {
+        console.log('Cancel clicked');
+      }
+    };
+    let buttons: any[] = [];
+    availableSocialNetworks.forEach(network => {
+      buttons.push({
+        text: network,
+        handler: () => {
+          this.sharingService.share(network, this.events.find(event => event.id == eventId).link);
+          console.log('Shared via ', network);
         }
-      ]
+      });
     });
+    buttons.push(cancelButton);
+    let actionSheetOptions: any = {
+      title: 'Social Networks',
+      buttons: buttons
+    };
+    let actionSheet = this.actionSheetCtrl.create(actionSheetOptions);
     actionSheet.present();
   }
 }

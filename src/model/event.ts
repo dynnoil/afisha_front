@@ -3,4 +3,6 @@ export class Event {
   name: string;
   description: string;
   image: string;
+  link: string;
+  date: Date;
 }
