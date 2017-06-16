@@ -2,9 +2,10 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { LocalStorageModule } from 'angular-2-local-storage';
 
 import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
+import { FavoritesPage } from '../pages/favorites/favorites';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { DetailsPage } from '../pages/details/details';
@@ -23,7 +24,7 @@ import { SharingService } from '../services/sharing.service';
     declarations: [
         MyApp,
         AboutPage,
-        ContactPage,
+        FavoritesPage,
         HomePage,
         TabsPage,
         DetailsPage,
@@ -32,13 +33,17 @@ import { SharingService } from '../services/sharing.service';
     ],
     imports: [
         BrowserModule,
+        LocalStorageModule.withConfig({
+            prefix: 'afisha-app',
+            storageType: 'localStorage'
+        }),
         IonicModule.forRoot(MyApp)
     ],
     bootstrap: [IonicApp],
     entryComponents: [
         MyApp,
         AboutPage,
-        ContactPage,
+        FavoritesPage,
         HomePage,
         TabsPage,
         DetailsPage

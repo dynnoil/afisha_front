@@ -5,5 +5,6 @@
 </ion-header>
 
 <ion-content cards-bg>
-  <event-card *ngFor="let event of events" [event]="event" (onEventClicked)="onEventClicked(event.id)" (onShareClicked)="onShareClicked(event.id)"></event-card>
+  <event-card *ngFor="let event of events" [event]="event" (onEventClicked)="onEventClicked(event.id)" (onShareClicked)="onShareClicked(event.id)"
+    (onFavoritesClicked)="onFavoritesClicked(event.id)"></event-card>
 </ion-content>

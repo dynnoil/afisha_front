@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TitleCasePipe } from '@angular/common';
-import { NavController, ModalController, ActionSheetController } from 'ionic-angular';
+import { NavController, ModalController, ActionSheetController, ToastController } from 'ionic-angular';
+import { LocalStorageService } from 'angular-2-local-storage';
 
 import { Event } from '../../model/event';
 import { DetailsPage } from '../../pages/details/details';
@@ -18,8 +19,10 @@ export class HomePage implements OnInit {
     private navCtrl: NavController,
     private modalCtrl: ModalController,
     private actionSheetCtrl: ActionSheetController,
+    private toastCtrl: ToastController,
     private eventService: EventService,
-    private sharingService: SharingService
+    private sharingService: SharingService,
+    private localStorageService: LocalStorageService
   ) { }
 
   ngOnInit(): void {
@@ -29,6 +32,15 @@ export class HomePage implements OnInit {
   onEventClicked(eventId: number): void {
     let modal = this.modalCtrl.create(DetailsPage, { eventId: eventId });
     modal.present();
+  }
+
+  onFavoritesClicked(eventId: number): void {
+    let event = this.events.find(event => event.id == eventId);
+    if (event) {
+      this.localStorageService.set(eventId.toString(), event);
+      console.log("Added event to Local Storage!");
+    }
+    this.presentToast("Added to Favorites!");
   }
 
   onShareClicked(eventId: number): void {
@@ -42,6 +54,7 @@ export class HomePage implements OnInit {
       role: 'cancel',
       handler: () => {
         console.log('Cancel clicked');
+        this.presentToast("Cancelled!");
       }
     };
     let buttons: any[] = [];
@@ -51,6 +64,7 @@ export class HomePage implements OnInit {
         text: titleCasePipe.transform(network),
         handler: () => {
           this.sharingService.share(network, this.events.find(event => event.id == eventId).link);
+          this.presentToast("Shared!");
           console.log('Shared via ', network);
         }
       });
@@ -63,4 +77,14 @@ export class HomePage implements OnInit {
     let actionSheet = this.actionSheetCtrl.create(actionSheetOptions);
     actionSheet.present();
   }
+
+  presentToast(message: string) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 2000,
+      position: "middle"
+    });
+    toast.present(toast);
+  }
+
 }

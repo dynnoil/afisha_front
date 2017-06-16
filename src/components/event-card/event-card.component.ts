@@ -8,10 +8,15 @@ import { Event } from '../../model/event';
 })
 export class EventCardComponent {
     @Input() event: Event;
-    @Output() onEventClicked = new EventEmitter<null>();
-    @Output() onShareClicked = new EventEmitter<null>();
+    @Output() onEventClicked = new EventEmitter();
+    @Output() onShareClicked = new EventEmitter();
+    @Output() onFavoritesClicked = new EventEmitter();
 
     constructor( ) { }
+
+    addToFavorites(): void {
+      this.onFavoritesClicked.emit();
+    }
 
     share(): void {
       this.onShareClicked.emit();
