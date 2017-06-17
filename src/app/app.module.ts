@@ -16,9 +16,14 @@ import { GoogleMapsComponent } from '../components/google-maps/google-maps.compo
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { Calendar } from '@ionic-native/calendar';
 
+import { AlertsService } from '../services/alerts.service';
+import { ActionSheetService } from '../services/action-sheet.service';
+import { ToastService } from '../services/toast.service';
 import { EventService } from '../services/event.service';
 import { SharingService } from '../services/sharing.service';
+import { EventStorageService } from '../services/event-storage.service';
 
 @NgModule({
     declarations: [
@@ -52,9 +57,14 @@ import { SharingService } from '../services/sharing.service';
         StatusBar,
         SplashScreen,
         SocialSharing,
+        Calendar,
         { provide: ErrorHandler, useClass: IonicErrorHandler },
+        AlertsService,
+        ActionSheetService,
+        ToastService,
         EventService,
-        SharingService
+        SharingService,
+        EventStorageService
     ]
 })
 export class AppModule { }

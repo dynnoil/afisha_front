@@ -4,5 +4,6 @@ export class Event {
   description: string;
   image: string;
   link: string;
-  date: Date;
+  startDate: Date;
+  endDate: Date;
 }

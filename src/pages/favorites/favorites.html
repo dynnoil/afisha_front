@@ -1,15 +1,29 @@
 <ion-header>
-  <ion-navbar>
+  <ion-toolbar>
     <ion-title>
-      Contact
+      Сохранено
     </ion-title>
-  </ion-navbar>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal" [disabled]="eventStorageService.isEmpty()" (tap)="showConfirm()">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <button ion-item *ngFor="let event of events" (click)="onEventClicked(event.id)">
-      {{event.name}}
-    </button>
+    <ion-item-sliding *ngFor="let event of events">
+      <ion-item (tap)="onEventClicked(event.id)">
+        <h2>{{event.name}}</h2>
+        <p>{{event.startDate | date}}</p>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="danger" (tap)="onRemoveClicked(event.id)">
+          <ion-icon name="trash"></ion-icon>
+          Remove
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 </ion-content>

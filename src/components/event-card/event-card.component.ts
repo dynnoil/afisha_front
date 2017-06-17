@@ -11,11 +11,16 @@ export class EventCardComponent {
     @Output() onEventClicked = new EventEmitter();
     @Output() onShareClicked = new EventEmitter();
     @Output() onFavoritesClicked = new EventEmitter();
+    @Output() onRemindClicked = new EventEmitter();
 
     constructor( ) { }
 
     addToFavorites(): void {
       this.onFavoritesClicked.emit();
+    }
+
+    remind(): void {
+      this.onRemindClicked.emit();
     }
 
     share(): void {

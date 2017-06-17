@@ -14,6 +14,6 @@ export class TabsPage {
   tab3Root = FavoritesPage;
 
   constructor() {
-
+    
   }
 }

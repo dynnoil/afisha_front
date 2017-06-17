@@ -9,7 +9,7 @@
         {{event.name}}
       </ion-card-title>
       <p>
-        {{event.date | date}}
+        {{event.startDate | date}}
       </p>
     </ion-card-content>
 
@@ -23,9 +23,9 @@
         </button>
     </ion-col>
     <ion-col text-center>
-      <button ion-button clear small color="danger" icon-left>
-          <ion-icon name='musical-notes'></ion-icon>
-          Listen
+      <button ion-button clear small color="danger" icon-left (click)="remind()">
+          <ion-icon name='calendar'></ion-icon>
+          Remind
         </button>
     </ion-col>
     <ion-col text-right>

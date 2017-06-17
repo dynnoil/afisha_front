@@ -20,6 +20,7 @@
         "@angular/http": "4.1.2",
         "@angular/platform-browser": "4.1.2",
         "@angular/platform-browser-dynamic": "4.1.2",
+        "@ionic-native/calendar": "^3.12.1",
         "@ionic-native/core": "3.10.2",
         "@ionic-native/google-maps": "^3.12.1",
         "@ionic-native/social-sharing": "^3.12.1",
@@ -28,6 +29,8 @@
         "@ionic/storage": "2.0.1",
         "angular-2-local-storage": "^1.0.1",
         "cordova-android": "^6.2.3",
+        "cordova-plugin-calendar": "^4.5.5",
+        "cordova-plugin-compat": "^1.0.0",
         "cordova-plugin-console": "^1.0.5",
         "cordova-plugin-device": "^1.1.4",
         "cordova-plugin-googlemaps": "^1.4.0",
@@ -61,7 +64,8 @@
             "cordova-plugin-googlemaps": {
                 "API_KEY_FOR_ANDROID": "AIzaSyDsBqAWWUYSX5XmYSmuTHCvmaxzGrIR_8w"
             },
-            "cordova-plugin-x-socialsharing": {}
+            "cordova-plugin-x-socialsharing": {},
+            "cordova-plugin-calendar": {}
         },
         "platforms": [
             "android"

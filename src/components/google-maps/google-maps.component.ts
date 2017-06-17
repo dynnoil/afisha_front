@@ -53,6 +53,8 @@ export class GoogleMapsComponent implements AfterViewInit, OnDestroy {
                     })
             });
 
+        }).catch(() => {
+            console.log("Google Maps are not available on your device!")
         });
     }
 

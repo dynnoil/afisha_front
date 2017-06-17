@@ -6,7 +6,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 export class SharingService {
     private socialNetworks: string[] = [
         'twitter',
-        'instagram',
+        'vk',
         'telegram'
     ];
 
