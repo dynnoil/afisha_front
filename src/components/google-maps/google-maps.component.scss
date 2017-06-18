@@ -1,11 +1,5 @@
 google-maps {
-  #map {
-    height: 100%;
-    width: 100%;
-  }
-}
-ion-app  {
-  .app-root {
-    
+  agm-map {
+      height: 300px;
   }
 }

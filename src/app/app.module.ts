@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { LocalStorageModule } from 'angular-2-local-storage';
+import { AgmCoreModule } from '@agm/core';
 
 import { AboutPage } from '../pages/about/about';
 import { FavoritesPage } from '../pages/favorites/favorites';
@@ -41,6 +42,9 @@ import { EventStorageService } from '../services/event-storage.service';
         LocalStorageModule.withConfig({
             prefix: 'afisha-app',
             storageType: 'localStorage'
+        }),
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyDsBqAWWUYSX5XmYSmuTHCvmaxzGrIR_8w'
         }),
         IonicModule.forRoot(MyApp)
     ],

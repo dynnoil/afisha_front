@@ -1,66 +1,29 @@
-import { Component, AfterViewInit, OnDestroy, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Platform } from 'ionic-angular';
-import {
-    GoogleMaps,
-    GoogleMap,
-    GoogleMapsEvent,
-    CameraPosition,
-    LatLng,
-    Marker,
-    MarkerOptions
-} from '@ionic-native/google-maps';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @Component({
     selector: 'google-maps',
-    template: '<div #map id="map"></div>',
-    providers: [GoogleMaps]
+    templateUrl: 'google-maps.component.html',
+    providers: [Geolocation]
 })
-export class GoogleMapsComponent implements AfterViewInit, OnDestroy {
-    private map: GoogleMap;
+export class GoogleMapsComponent {
+    @Input() lat: number;
+    @Input() lng: number;
+    @Input() title: string;
 
-    @Input() position: LatLng;
-    @Input() markers: MarkerOptions[];
-    @Input() zoom: number;
-    @Input() tilt: number;
-
-    constructor(private platform: Platform, private googleMaps: GoogleMaps) {
-        this.position = new LatLng(43.0741904, -89.3809802);
-        this.markers = [];
-        this.zoom = 18;
-        this.tilt = 30;
-    }
-
-    ngAfterViewInit(): void {
-        this.googleMaps.isAvailable().then(() => {
-            this.map = this.googleMaps.create("map");
-            this.map.one(GoogleMapsEvent.MAP_READY).then(
-                () => {
-                    console.log('Map is ready!');
-                    // Now you can add elements to the map like the marker
-                }
-            );
-            let cameraPosition: CameraPosition = {
-                target: this.position,
-                zoom: this.zoom,
-                tilt: this.tilt
-            };
-            this.map.moveCamera(cameraPosition);
-
-            this.markers.forEach(marker => {
-                this.map.addMarker(marker)
-                    .then((marker: Marker) => {
-                        marker.showInfoWindow();
-                    })
+    constructor(private platform: Platform, private geolocation: Geolocation) {
+        this.title = 'Vologda';
+        this.platform.ready().then(() => {
+            this.geolocation.getCurrentPosition().then((resp) => {
+                this.lat = resp.coords.latitude;
+                this.lng = resp.coords.longitude;
+            }).catch((error) => {
+                console.log('Error getting location', error);
+                this.lat = 0;
+                this.lng = 0;
             });
-
-        }).catch(() => {
-            console.log("Google Maps are not available on your device!")
         });
     }
 
-    ngOnDestroy(): void {
-        if (this.map) {
-            this.map.clear();
-        }
-    }
 }

@@ -6,24 +6,27 @@ import { Event } from '../../model/event';
 import { EventService } from '../../services/event.service';
 
 @Component({
-  selector: 'details-page',
-  templateUrl: './details.html'
+    selector: 'details-page',
+    templateUrl: './details.html'
 })
 export class DetailsPage implements OnInit {
-  event: Event;
+    event: Event;
 
-  constructor(
-    private params: NavParams,
-    private viewCtrl: ViewController,
-    private eventService: EventService
-  ) { }
+    lat: number = 51.678418;
+    lng: number = 7.809007;
 
-  ngOnInit(): void {
-    let eventId: number = this.params.get('eventId');
-    this.event = this.eventService.getEvent(eventId);
-  }
+    constructor(
+        private params: NavParams,
+        private viewCtrl: ViewController,
+        private eventService: EventService
+    ) { }
 
-  dismiss() {
-    this.viewCtrl.dismiss();
-  }
+    ngOnInit(): void {
+        let eventId: number = this.params.get('eventId');
+        this.event = this.eventService.getEvent(eventId);
+    }
+
+    dismiss() {
+        this.viewCtrl.dismiss();
+    }
 }
