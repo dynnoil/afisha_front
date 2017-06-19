@@ -8,20 +8,19 @@ import { Geolocation } from '@ionic-native/geolocation';
     providers: [Geolocation]
 })
 export class GoogleMapsComponent {
-    @Input() lat: number;
-    @Input() lng: number;
-    @Input() title: string;
+    private lat: number = 0.0;
+    private lng: number = 0.0;
+
+    @Input() place: any;
+    @Input() zoom: number = 16;
 
     constructor(private platform: Platform, private geolocation: Geolocation) {
-        this.title = 'Vologda';
         this.platform.ready().then(() => {
             this.geolocation.getCurrentPosition().then((resp) => {
                 this.lat = resp.coords.latitude;
                 this.lng = resp.coords.longitude;
             }).catch((error) => {
                 console.log('Error getting location', error);
-                this.lat = 0;
-                this.lng = 0;
             });
         });
     }

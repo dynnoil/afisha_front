@@ -14,6 +14,8 @@ import { ToastService } from '../../services/toast.service';
     templateUrl: 'home.html'
 })
 export class HomePage implements OnInit {
+    private search: boolean = false;
+
     events: Event[];
 
     constructor(
@@ -65,4 +67,11 @@ export class HomePage implements OnInit {
         this.actionSheetService.createShareActionSheet(link);
     }
 
+    enableSearch(): void {
+      this.search = true;
+    }
+
+    disableSearch(): void {
+      this.search = false;
+    }
 }

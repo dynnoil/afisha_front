@@ -15,5 +15,6 @@
 </ion-header>
 
 <ion-content>
-  <google-maps></google-maps>
+  <google-maps [place]="{lat: event.place.latitude, lng: event.place.longitude}"></google-maps>
+  <h2 padding>{{event.name}}</h2>
 </ion-content>
