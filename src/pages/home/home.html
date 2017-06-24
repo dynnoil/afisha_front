@@ -1,18 +1,7 @@
 <ion-header>
-  
-  <ion-toolbar *ngIf="!search">
+  <ion-toolbar>
     <ion-title>Home</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only color="royal" [disabled]="events.length === 0" (tap)="enableSearch()">
-        <ion-icon name="search"></ion-icon>
-      </button>
-    </ion-buttons>
   </ion-toolbar>
-
-  <ion-toolbar *ngIf="search">
-    <ion-searchbar [showCancelButton]="true" (ionCancel)="disableSearch()"></ion-searchbar>
-  </ion-toolbar>
-
 </ion-header>
 
 <ion-content cards-bg>

@@ -1,63 +1,37 @@
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 
 import { Event } from '../model/event';
 
-const EVENTS: Event[] = [
-    {
-        id: 1,
-        name: "Somertime",
-        description: "something",
-        image: "https://yandex.ru/images/today?size=1920x1080",
-        link: "https://angular.io/guide/pipes",
-        startDate: new Date("February 4, 2016 10:13:00"),
-        endDate: new Date("February 4, 2016 10:13:00"),
-        place: {
-          id: 0,
-          title: 'Garage',
-          latitude: 59.21806649999999,
-          longitude: 39.8978052
-        }
-    },
-    {
-        id: 2,
-        name: "Drinking Booze",
-        description: "something",
-        image: "https://www.kr-gazeta.ru/upload/medialibrary/934/глинтвейн.jpg",
-        link: "https://angular.io/guide/pipes",
-        startDate: new Date("February 4, 2016 10:13:00"),
-        endDate: new Date("February 4, 2016 10:13:00"),
-        place: {
-          id: 0,
-          title: 'Garage',
-          latitude: 59.21806649999999,
-          longitude: 39.8978052
-        }
-    },
-    {
-        id: 3,
-        name: "Вечер в Бардаке",
-        description: "Проведи незабываемый вечер",
-        image: "http://mtdata.ru/u3/photoF82A/20851185804-0/original.jpg",
-        link: "https://angular.io/guide/pipes",
-        startDate: new Date("February 4, 2016 10:13:00"),
-        endDate: new Date("February 4, 2016 10:13:00"),
-        place: {
-          id: 0,
-          title: 'Garage',
-          latitude: 59.21806649999999,
-          longitude: 39.8978052
-        }
-    }
-];
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class EventService {
+    private eventsUrl = 'api/events';
 
-    getEvents(): Event[] {
-        return EVENTS;
+    constructor(private http: Http) { }
+
+    getEvents(): Promise<Event[]> {
+        return this.http.get(this.eventsUrl)
+            .toPromise()
+            .then(response => response.json().data as Event[])
+            .catch(this.handleError);
     }
 
-    getEvent(id: number): Event {
-        return EVENTS.find(event => event.id === id);
+    getEvent(id: number): Promise<Event> {
+        const url = `${this.eventsUrl}/${id}`;
+        let event: Promise<Event> = this.http.get(url)
+            .toPromise()
+            .then(response => response.json().data as Event)
+            .catch(this.handleError);
+        event.then(event => console.log(JSON.stringify(event)));
+        return event;
     }
+
+
+    private handleError(error: any): Promise<any> {
+        console.error('An error occurred', error);
+        return Promise.reject(error.message || error);
+    }
+
 }

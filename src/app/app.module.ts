@@ -4,8 +4,9 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { AgmCoreModule } from '@agm/core';
+import { HttpModule } from '@angular/http';
 
-import { AboutPage } from '../pages/about/about';
+import { SearchPage } from '../pages/search/search';
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -18,6 +19,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Calendar } from '@ionic-native/calendar';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { AlertsService } from '../services/alerts.service';
 import { ActionSheetService } from '../services/action-sheet.service';
@@ -25,11 +27,12 @@ import { ToastService } from '../services/toast.service';
 import { EventService } from '../services/event.service';
 import { SharingService } from '../services/sharing.service';
 import { EventStorageService } from '../services/event-storage.service';
+import { InMemoryDataService } from '../services/in-memory-data.service';
 
 @NgModule({
     declarations: [
         MyApp,
-        AboutPage,
+        SearchPage,
         FavoritesPage,
         HomePage,
         TabsPage,
@@ -39,6 +42,7 @@ import { EventStorageService } from '../services/event-storage.service';
     ],
     imports: [
         BrowserModule,
+        HttpModule,
         LocalStorageModule.withConfig({
             prefix: 'afisha-app',
             storageType: 'localStorage'
@@ -46,12 +50,13 @@ import { EventStorageService } from '../services/event-storage.service';
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyDsBqAWWUYSX5XmYSmuTHCvmaxzGrIR_8w'
         }),
+        InMemoryWebApiModule.forRoot(InMemoryDataService),
         IonicModule.forRoot(MyApp)
     ],
     bootstrap: [IonicApp],
     entryComponents: [
         MyApp,
-        AboutPage,
+        SearchPage,
         FavoritesPage,
         HomePage,
         TabsPage,

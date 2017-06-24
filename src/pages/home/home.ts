@@ -14,8 +14,6 @@ import { ToastService } from '../../services/toast.service';
     templateUrl: 'home.html'
 })
 export class HomePage implements OnInit {
-    private search: boolean = false;
-
     events: Event[];
 
     constructor(
@@ -29,7 +27,7 @@ export class HomePage implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.events = this.eventService.getEvents();
+        this.eventService.getEvents().then(events => this.events = events);
     }
 
     onEventClicked(eventId: number): void {
@@ -65,13 +63,5 @@ export class HomePage implements OnInit {
     presentActionSheet(eventId: number) {
         let link = this.events.find(event => event.id == eventId).link;
         this.actionSheetService.createShareActionSheet(link);
-    }
-
-    enableSearch(): void {
-      this.search = true;
-    }
-
-    disableSearch(): void {
-      this.search = false;
     }
 }

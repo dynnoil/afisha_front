@@ -12,9 +12,6 @@ import { EventService } from '../../services/event.service';
 export class DetailsPage implements OnInit {
     event: Event;
 
-    lat: number = 51.678418;
-    lng: number = 7.809007;
-
     constructor(
         private params: NavParams,
         private viewCtrl: ViewController,
@@ -23,7 +20,9 @@ export class DetailsPage implements OnInit {
 
     ngOnInit(): void {
         let eventId: number = this.params.get('eventId');
-        this.event = this.eventService.getEvent(eventId);
+        console.log(eventId);
+        this.eventService.getEvent(eventId).then(event => this.event = event);
+        console.log(JSON.stringify(this.event));
     }
 
     dismiss() {
