@@ -20,9 +20,7 @@ export class DetailsPage implements OnInit {
 
     ngOnInit(): void {
         let eventId: number = this.params.get('eventId');
-        console.log(eventId);
         this.eventService.getEvent(eventId).then(event => this.event = event);
-        console.log(JSON.stringify(this.event));
     }
 
     dismiss() {
