@@ -10,7 +10,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 
-
+import { Event } from '../../model/event';
 import { EventSearchService } from '../../services/event-search.service';
 
 @Component({
@@ -28,7 +28,6 @@ export class SearchPage implements OnInit {
   ) { }
 
   search(term: string): void {
-    console.log(term);
     this.searchTerms.next(term);
   }
 

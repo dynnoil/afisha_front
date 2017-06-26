@@ -13,7 +13,7 @@ export class EventSearchService {
 
     search(term: string): Observable<Event[]> {
         return this.http
-            .get(`api/heroes/?name=${term}`)
+            .get(`api/events/?name=${term}`)
             .map(response => response.json().data as Event[]);
     }
 }

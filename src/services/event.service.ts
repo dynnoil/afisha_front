@@ -20,12 +20,10 @@ export class EventService {
 
     getEvent(id: number): Promise<Event> {
         const url = `${this.eventsUrl}/${id}`;
-        let event: Promise<Event> = this.http.get(url)
+        return this.http.get(url)
             .toPromise()
             .then(response => response.json().data as Event)
             .catch(this.handleError);
-        event.then(event => console.log(JSON.stringify(event)));
-        return event;
     }
 
 

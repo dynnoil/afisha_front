@@ -5,6 +5,7 @@ export class Event {
     name: string;
     description: string;
     image: string;
+    images?: string[];
     link: string;
     startDate: Date;
     endDate: Date;

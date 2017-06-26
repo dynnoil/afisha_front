@@ -31,7 +31,7 @@ export class ActionSheetService {
             handler: () => { }
         });
         let actionSheetOptions: any = {
-            title: 'Social Networks',
+            title: 'Социальные сети',
             buttons: buttons
         };
         let actionSheet = this.actionSheetCtrl.create(actionSheetOptions);

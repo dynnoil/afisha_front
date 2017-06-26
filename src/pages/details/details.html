@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-toolbar>
-    <ion-title>
+    <ion-title *ngIf="event">
       {{event.name}}
     </ion-title>
     <ion-buttons start>
@@ -14,7 +14,48 @@
 
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="event">
+
+  <ion-fab right bottom>
+    <button ion-fab color="danger"><ion-icon name="share"></ion-icon></button>
+    <ion-fab-list side="left">
+      <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <ion-slides *ngIf="event.images" pager>
+    <ion-slide *ngFor="let image of event.images">
+      <img [src]="image">
+    </ion-slide>
+  </ion-slides>
+
+  <div padding>
+    <ion-row no-padding>
+      <ion-col col-8>
+        <h3>Время проведения</h3>
+        <p>
+          {{event.startDate | date}} - {{event.endDate | date}}
+        </p>
+      </ion-col>
+      <ion-col col-4 text-right>
+        <button ion-button icon-only (tap)="remind()">
+          <ion-icon name="calendar"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <ion-card>
+    <ion-card-header>
+      Описание
+    </ion-card-header>
+    <ion-card-content>
+      {{event.description}}
+    </ion-card-content>
+  </ion-card>
+
   <google-maps [place]="{lat: event.place.latitude, lng: event.place.longitude}"></google-maps>
-  <h2 padding>{{event.name}}</h2>
 </ion-content>
